@@ -11,14 +11,15 @@ namespace Manager.People.Domain.Entities
         public DateTime BirthDay { get; protected set; }
         public IEnumerable<AddressEntity> Addresses { get; protected set; }
 
-        public static PersonEntity New(string name, string cpf, string email, DateTime birthDate) =>
-            new PersonEntity
-            {
-                Name = name,
-                CPF = cpf,
-                Email = email,
-                BirthDay = birthDate
-            };
+        public static PersonEntity New(int id) => new PersonEntity { Id = id };
+        public PersonEntity AddDataProfile(string name, string cpf, string email, DateTime birthDate)
+        {
+            Name = name;
+            CPF = cpf;
+            Email = email;
+            BirthDay = birthDate;
+            return this;
+        }
 
         public PersonEntity AddAddress(IEnumerable<AddressEntity> addresses)
         {

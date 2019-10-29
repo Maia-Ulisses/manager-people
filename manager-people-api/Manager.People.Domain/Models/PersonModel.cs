@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Manager.People.Domain.Entities;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Manager.People.Domain.Models
 {
@@ -11,5 +11,15 @@ namespace Manager.People.Domain.Models
         public string Email { get; protected set; }
         public DateTime BirthDay { get; protected set; }
         public IEnumerable<AddressModel> Addresses { get; protected set; }
+
+        public static PersonModel New(PersonEntity person) =>
+            new PersonModel
+            {
+                Name = person.Name,
+                CPF = person.CPF,
+                Email = person.Email,
+                BirthDay = person.BirthDay,
+                Addresses = AddressModel.NewCollection(person?.Addresses)
+            };
     }
 }
