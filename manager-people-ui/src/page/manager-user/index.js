@@ -29,7 +29,7 @@ export default function ManagerUser() {
   return (
     <div>
     <h1>Gestão de Pessoas</h1>
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} style={{maxHeight: 400, overflow: 'auto'}}>
         <Grid container direction="row" justify="flex-end" alignItems="center">
           <Grid item xs={6} sm={4}>
           <Fab color="primary" aria-label="add" onClick={openFormCreate}  className={classes.button}>

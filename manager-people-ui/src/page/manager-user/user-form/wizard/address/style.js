@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
  const style = makeStyles(theme => ({
     root: {
       width: '46vw',
-      height: '68vh',
+      height: '65vh',
 
     },
     backButton: {
