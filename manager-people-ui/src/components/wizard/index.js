@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 export default function WizardForm(){
+  const classes = style();
 
   const user = useSelector(state => state.user);
   const [userData, setUserData] = useState(user.user);
@@ -44,7 +45,6 @@ function getSteps() {
     return ['Pessoa', 'Endereços'];
   }
 
-  const classes = style();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
  
@@ -62,7 +62,7 @@ function getSteps() {
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel><h3>{label}</h3></StepLabel>
           </Step>
         ))}
       </Stepper>
@@ -83,9 +83,6 @@ function getSteps() {
                 className={classes.backButton}
               >
                 Back
-              </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
             </div>
           </div>

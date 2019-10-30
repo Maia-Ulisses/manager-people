@@ -3,10 +3,12 @@ import { Grid, Button } from '@material-ui/core';
 import { Form, Field } from 'react-final-form';
 import validateFields from './validate'
 import TextFieldWrapper from '../TextField'
-
+import style from './style';
 
 
 export default function UserFilds(props) {
+  const classes = style();
+
   const user = props.user;
   const isEdit = props.isEdit
 
@@ -30,7 +32,7 @@ export default function UserFilds(props) {
       }
 
   const completedUserFilds = values =>
-      props.onClick(values)
+    props.onClick(values)
 
   return (
     <Form
@@ -81,7 +83,7 @@ export default function UserFilds(props) {
               />
             </Grid>
             <Grid item xs={6}>
-              <Button type="submit" variant="contained" color="primary">
+              <Button className={classes.button} type="submit" variant="contained" color="primary">
                 Next
               </Button>
             </Grid>
