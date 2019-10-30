@@ -6,6 +6,7 @@ namespace Manager.People.Domain.Models
 {
     public class PersonModel
     {
+        public int Id { get; protected set; }
         public string Name { get; protected set; }
         public string CPF { get; protected set; }
         public string Email { get; protected set; }
@@ -15,6 +16,7 @@ namespace Manager.People.Domain.Models
         public static PersonModel New(PersonEntity person) =>
             new PersonModel
             {
+                Id = person.Id,
                 Name = person.Name,
                 CPF = person.CPF,
                 Email = person.Email,

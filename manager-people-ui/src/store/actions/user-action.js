@@ -4,13 +4,20 @@ export const userGetAllRequest = () => ({
     type: ActionsTypes.USER_GET_ALL_REQUEST,
 })
 
-export const userOpenForm = (isEdit) => ({
-    type: ActionsTypes.OPEN_FORM,
-    isEdit
+export const userGetAllSuccess = (data) => ({
+    type: ActionsTypes.USER_GET_ALL_SUCCESS,
+    payload: {
+        data: data
+    }
 })
 
-export const userCloseForm = () => ({
-    type: ActionsTypes.CLOSE_FORM,
+export const userGet = (id, isEdit) => ({
+    type: ActionsTypes.USER_GET,
+    payload:
+    {
+        id: id,
+        isEdit: isEdit
+    }
 })
 
 export const userRemove = (id) => ({

@@ -12,12 +12,13 @@ export default function ListComponent(props) {
   let indice = 0;
 
   const onRemove = (id) => {props.onRemove(id)};
+  const onEdit = (id) => {props.onEdit(id)};
 
-  const showEdit = (isEdit) => {
+  const showEdit = (isEdit,value) => {
     return (isEdit
       ?
       <ListItemIcon className={classes.teste}>
-        <IconButton edge="end" aria-label="comments">
+        <IconButton edge="end" aria-label="comments" onClick={()=> onEdit(value.id)} >
           Edit
       </IconButton>
       </ListItemIcon>
@@ -33,12 +34,12 @@ export default function ListComponent(props) {
           const labelId = `${indice += 1}`;
           return (
             <ListItem key={labelId} role={undefined} dense button onClick={() => (value)}>
-              <ListItemText id={labelId} primary={`${value.name} | ${value.email} `} />
+              <ListItemText id={labelId} primary={value.content} />
 
-              {showEdit(props.isEdit)}
+              {showEdit(props.isEdit,value)}
 
               <ListItemSecondaryAction>
-                <IconButton edge="end" onClick={()=> onRemove(value.name)} karia-label="comments">
+                <IconButton edge="end" onClick={()=> onRemove(value.id)} karia-label="comments">
                   Delete
                   </IconButton>
               </ListItemSecondaryAction>

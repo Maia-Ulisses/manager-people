@@ -1,8 +1,8 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import { Form, Field } from 'react-final-form';
-import TextFieldWrapper from './../../../../../components/TextField'
-import ListComponent from './../../../../../components/list-components'
+import TextFieldWrapper from '../TextField'
+import ListComponent from '../list-components'
 import style from './style';
 
 export default function AddressFilds() {

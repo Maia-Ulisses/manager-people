@@ -33,6 +33,8 @@ namespace Manager.People.Api
             services.AddManager(configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCors();
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -45,6 +47,12 @@ namespace Manager.People.Api
             {
                 app.UseHsts();
             }
+
+            app.UseCors(builder => builder
+               .AllowAnyOrigin()
+               .AllowCredentials()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
 
             app.UseHttpsRedirection();
             app.UseMvc();

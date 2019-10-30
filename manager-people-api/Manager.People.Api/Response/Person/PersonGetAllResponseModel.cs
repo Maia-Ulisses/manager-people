@@ -1,6 +1,5 @@
 ﻿using Manager.People.Api.Response.Address;
 using Manager.People.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,6 +15,7 @@ namespace Manager.People.Api.Response.Person
         private static PersonGetAllResponseModel ParseModel(PersonModel person) =>
              new PersonGetAllResponseModel
              {
+                 Id = person.Id,
                  Name = person.Name,
                  CPF = person.CPF,
                  Email = person.Email,

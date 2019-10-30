@@ -4,16 +4,37 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import style from './style';
-import UserFilds from './user'
-import AddressFilds from './address'
+import UserFilds from '../user'
+import AddressFilds from '../address'
+import { useSelector, useDispatch } from 'react-redux';
 
 
-function getStepContent(stepIndex) {
+export default function WizardForm(){
+
+  const user = useSelector(state => state.user);
+  const [userData, setUserData] = useState(user.user);
+  const [isEdit, setIsEdit] = useState(user.isEdit);
+
+  useEffect(() => {
+    setUserData(user.user);
+    setUserData(user.isEdit);
+  }, [])
+
+  useEffect(() => {
+    setUserData(user.user);
+  }, [user.user])
+
+  useEffect(() => {
+    setIsEdit(user.isEdit);
+  }, [user.isEdit])
+
+
+  function getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
-        return <UserFilds />;
+        return <div><UserFilds onClick={handleNext} user={userData} isEdit={isEdit}/></div>;
       case 1:
-        return <AddressFilds />;
+        return <div><AddressFilds /></div>;
       default:
         return 'Unknown stepIndex';
     }
@@ -23,18 +44,19 @@ function getSteps() {
     return ['Pessoa', 'Endereços'];
   }
 
-export default function WizardForm(){
   const classes = style();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
  
-  const handleNext = () => {
+  const handleNext = (values) => {
+    console.log(values)
     setActiveStep(prevActiveStep => prevActiveStep + 1);
   };
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
+
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep} alternativeLabel>
