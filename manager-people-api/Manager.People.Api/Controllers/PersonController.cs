@@ -1,6 +1,9 @@
-﻿using Manager.People.Api.Response.Person;
+﻿using Manager.People.Api.Request.Person;
+using Manager.People.Api.Response.Person;
 using Manager.People.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Manager.People.Api.Controllers
 {
@@ -25,7 +28,30 @@ namespace Manager.People.Api.Controllers
         public IActionResult Get(int id)
         {
             var personModel = _personService.GetById(id);
-            return Ok(PersonGetByIdResponseModel.New(personModel));
+            return Ok(PersonResponseModel.New(personModel));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(PersonRequestBaseModel personRequest)
+        { 
+            var personModel = personRequest.ToModel();
+            var personResult = await _personService.Create(personModel);
+            return Ok(PersonResponseModel.New(personResult));          
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromBody]PersonRequestBaseModel personRequest, int id)
+        {
+            var personModel = personRequest.ToModel();
+            var personResult = await _personService.Update(personModel, id);
+            return Ok(PersonResponseModel.New(personResult));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+             await _personService.Delete(id);
+            return Ok();
         }
     }
 }

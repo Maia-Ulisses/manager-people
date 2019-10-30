@@ -7,6 +7,7 @@ namespace Manager.People.Domain.Repositories
     {
         IEnumerable<PersonEntity> GetAll();
         PersonEntity GetById(int id);
-
+        PersonEntity Save(PersonEntity person);
+        void Remove(PersonEntity personEntity);
     }
 }

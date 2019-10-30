@@ -1,4 +1,8 @@
-﻿namespace Manager.People.Domain.Entities
+﻿using Manager.People.Domain.Models;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Manager.People.Domain.Entities
 {
     public class AddressEntity : Entity
     {
@@ -25,6 +29,19 @@
             PersonId = id;
             return this;
         }
+        public static IEnumerable<AddressEntity> NewCollection(IEnumerable<AddressModel> addresses, PersonEntity person) =>
+           addresses?.Select(a => ParseModel(a, person));
+        private static AddressEntity ParseModel(AddressModel address, PersonEntity person) =>
+            new AddressEntity
+            {
+                Id = address.Id,
+                ZipCode = address?.ZipCode,
+                Street = address?.Street,
+                Neighborhood = address?.Neighborhood,
+                City = address?.City,
+                State = address?.State,
+                PersonEntity = person
+            };
 
     }
 }

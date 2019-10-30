@@ -60,7 +60,7 @@ namespace Manager.People.Infra.Data.Migrations
                         {
                             Id = 3,
                             City = "Campinas",
-                            GUID = new Guid("87349381-77f6-4f9b-8d3d-b8bfd41de39b"),
+                            GUID = new Guid("0acc8982-f966-4f43-9c65-bdc28cd8f166"),
                             Neighborhood = "Centro",
                             PersonId = 1,
                             State = "SP",
@@ -71,7 +71,7 @@ namespace Manager.People.Infra.Data.Migrations
                         {
                             Id = 5,
                             City = "São Paulo",
-                            GUID = new Guid("a1c6c742-1c22-4d13-9d8b-0736bd3eae17"),
+                            GUID = new Guid("59ef313c-c03a-413c-bdc1-fff7ce2344ff"),
                             Neighborhood = "Centro",
                             PersonId = 2,
                             State = "SP",
@@ -113,7 +113,7 @@ namespace Manager.People.Infra.Data.Migrations
                             BirthDay = new DateTime(1998, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CPF = "45808039819",
                             Email = "ulisses@email.com.br",
-                            GUID = new Guid("6bd6e9de-ab0a-4273-8b51-f9892a29fbdc"),
+                            GUID = new Guid("3e7ccfdb-b867-4057-9562-05828f861f5c"),
                             Name = "Ulisses Maia"
                         },
                         new
@@ -122,7 +122,7 @@ namespace Manager.People.Infra.Data.Migrations
                             BirthDay = new DateTime(1953, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CPF = "09519980563",
                             Email = "jose@email.com.br",
-                            GUID = new Guid("26ec2d3f-15fe-4dad-ab81-8682d850b3aa"),
+                            GUID = new Guid("8e2be299-71be-4aff-8c6e-2857bd65641b"),
                             Name = "José Pereira"
                         });
                 });

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Manager.People.Domain.Models;
+using System;
 using System.Collections.Generic;
 
 namespace Manager.People.Domain.Entities
@@ -11,7 +12,25 @@ namespace Manager.People.Domain.Entities
         public DateTime BirthDay { get; protected set; }
         public IEnumerable<AddressEntity> Addresses { get; protected set; }
 
-        public static PersonEntity New(int id) => new PersonEntity { Id = id };
+        public static PersonEntity New(PersonModel person) =>
+          new PersonEntity
+          {
+              Id = person.Id,
+              Name = person.Name,
+              CPF = person.CPF,
+              Email = person.Email,
+              BirthDay = person.BirthDay,
+          };
+
+        public PersonEntity UpdateEntity(PersonModel person)
+        {
+            Name = person.Name;
+            CPF = person.CPF;
+            Email = person.Email;
+            BirthDay = person.BirthDay;
+            return this;
+        }
+        public static PersonEntity New(int id) => new PersonEntity { Id = id  };
         public PersonEntity AddDataProfile(string name, string cpf, string email, DateTime birthDate)
         {
             Name = name;

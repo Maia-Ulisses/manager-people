@@ -6,6 +6,7 @@ namespace Manager.People.Api.Response.Address
 {
     public class AddressBaseResponseModel
     {
+        public int Id { get; protected set; }
         public string ZipCode { get; protected set; }
         public string Street { get; protected set; }
         public string Neighborhood { get; protected set; }
@@ -19,6 +20,7 @@ namespace Manager.People.Api.Response.Address
         protected static AddressBaseResponseModel ParseModel(AddressModel addressModel) =>
             new AddressBaseResponseModel
             {
+                Id = addressModel.Id,
                 ZipCode = addressModel.ZipCode,
                 Street = addressModel.Street,
                 Neighborhood = addressModel.Neighborhood,

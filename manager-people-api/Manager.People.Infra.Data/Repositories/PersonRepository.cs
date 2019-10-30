@@ -17,7 +17,14 @@ namespace Manager.People.Infra.Data.Repositories
         public IEnumerable<PersonEntity> GetAll() => NoTracking();
 
         public PersonEntity GetById(int id) => _context.People.Include(p => p.Addresses).FirstOrDefault(p => p.Id == id);
-     
+
+        public void Remove(PersonEntity personEntity) => _context.People.Remove(personEntity);
+      
+        public PersonEntity Save(PersonEntity person)
+        {
+            _context.Add(person);
+            return person;
+        }
 
         private IQueryable<PersonEntity> NoTracking() => _context.People.AsNoTracking();
     }

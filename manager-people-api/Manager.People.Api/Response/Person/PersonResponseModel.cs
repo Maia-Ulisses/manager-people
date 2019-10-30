@@ -3,11 +3,12 @@ using Manager.People.Domain.Models;
 
 namespace Manager.People.Api.Response.Person
 {
-    public class PersonGetByIdResponseModel : PersonResponseBaseModel
+    public class PersonResponseModel : PersonResponseBaseModel
     {
-        public static PersonGetByIdResponseModel New(PersonModel person) =>
-           new PersonGetByIdResponseModel
+        public static PersonResponseModel New(PersonModel person) =>
+           new PersonResponseModel
            {
+               Id = person.Id,
                Name = person.Name,
                CPF = person.CPF,
                Email = person.Email,
