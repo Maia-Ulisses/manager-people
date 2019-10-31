@@ -6,6 +6,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import style from './style';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 
 export default function ListComponent(props) {
   const classes = style();
@@ -19,7 +21,7 @@ export default function ListComponent(props) {
       ?
       <ListItemIcon className={classes.teste}>
         <IconButton edge="end" aria-label="comments" onClick={()=> onEdit(value.id)} >
-          Edit
+        <EditIcon/>
       </IconButton>
       </ListItemIcon>
       :
@@ -40,7 +42,7 @@ export default function ListComponent(props) {
 
               <ListItemSecondaryAction>
                 <IconButton edge="end" onClick={()=> onRemove(value.id)} karia-label="comments">
-                  Delete
+                <DeleteForeverIcon />
                   </IconButton>
               </ListItemSecondaryAction>
             </ListItem>

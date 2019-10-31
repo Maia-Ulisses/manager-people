@@ -15,12 +15,14 @@ const style = makeStyles(theme => ({
       margin: '2% auto',
       backgroundColor: '#c3c3c3',
       maxWidth: 800,
+      maxHeight: 400, 
+      overflow: 'auto'
     },
     input: {
       display: 'none',
     },
-    teste:{
-      padding: '0 44px 0 0px',
+    title:{
+      color: 'white'
     }
   }));
 

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Button } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { Form, Field } from 'react-final-form';
 import TextFieldWrapper from '../TextField'
 import ListComponent from '../list-components'
 import style from './style';
+import Button from '../button'
+
 
 const customListAddress = (addresses) =>
   addresses.map(ad => { return { id: ad.id, content: `${ad.zipCode} | ${ad.street} | ${ad.city} | ${ad.state}` } });
@@ -19,17 +21,25 @@ const customListAddress = (addresses) =>
     }
   }
 
+  const generateId = () => Math.floor(Math.random() * 999999999999) + 9999999999;
+
+
 export default function AddressFilds(props) {
   const classes = style();
   const [addresses, setAddresses] = useState(props.addresses)
   const [customAddress, setCustomAddresses] = useState(customListAddress(addresses))
   const [address, setAddress] = useState(initialAddress())
+  const [addressForm, setAddressForm] = useState(address)
+
+
+  useEffect(() => {
+    setAddressForm(address)
+  }, [address])
 
   useEffect(() => {
     setCustomAddresses(customListAddress(props.addresses))
     setAddress(initialAddress())
   }, [props])
-
 
   const onEdit = (id) => {
     const address = addresses.filter(ad => ad.id === id)[0]
@@ -43,7 +53,7 @@ export default function AddressFilds(props) {
     props.onClick(addressesUpdate);
   }
 
-  const completedAddresFilds = (values) => {
+  const completedAddresFilds = async (values) => {
     if (addresses.map(ad => ad.id === values.id).filter(x => x)[0]) {
       const addressesUpdate = addresses.map(ad => {
         if (ad.id === values.id) {
@@ -59,9 +69,10 @@ export default function AddressFilds(props) {
       setAddresses(addressesUpdate);
       setCustomAddresses(customListAddress(addressesUpdate));
     } else {
-      addresses.push(values);
+      addresses.push({...values, ...values, id:generateId()});
       setCustomAddresses(customListAddress(addresses));
       setAddresses(addresses);
+      setAddressForm(initialAddress())
     }
     props.onClick(addresses);
     setAddress(initialValues());
@@ -82,9 +93,12 @@ export default function AddressFilds(props) {
     <div>
       <Form
         onSubmit={completedAddresFilds}
-        initialValues={initialValues()}
-        render={({ handleSubmit, values}) => (
-          <form onSubmit={handleSubmit}>
+        initialValues={addressForm}
+        render={({ handleSubmit, values, reset}) => (
+          <form onSubmit={event => {
+            const handle = handleSubmit(event);
+             handle.then(reset);
+          }}>
             <Grid container alignItems="flex-start" spacing={2}>
               <Grid item sm={6}>
                 <Field
@@ -145,7 +159,9 @@ export default function AddressFilds(props) {
           </form>
         )}
       />
+      <div className={classes.list}>
       <ListComponent array={customAddress} onEdit={onEdit} onRemove={onRemove} isEdit={true} />
+      </div>
     </div>
   );
 }

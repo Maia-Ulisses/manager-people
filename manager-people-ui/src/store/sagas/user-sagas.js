@@ -3,6 +3,14 @@ import api from '../../services/api'
 import {userGetAllSuccess, userGet} from '../actions/user-action'
 import { openForm, closeForm } from '../actions/modal-action'
 
+export function* remove(action) {
+  try {
+    yield call(api.delete,`/${action.id}`)
+    yield getAll();
+  } catch (err) {
+  }
+}
+
 export function* update(action) {
   try {
     yield call(api.put,`/${action.payload.data.id}`,action.payload.data)

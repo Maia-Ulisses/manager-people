@@ -13,6 +13,10 @@ import { makeStyles } from '@material-ui/core/styles';
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(1),
     },
+    list:{
+      maxHeight: '187px',
+      overflow: 'auto',
+    }
   }));
 
   export default style;

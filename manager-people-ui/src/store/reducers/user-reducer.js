@@ -19,7 +19,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         case ActionsTypes.USER_GET:
             return { ...state, isEdit: action.payload.isEdit, user: action.payload.data }
         case ActionsTypes.USER_REMOVE_REQUEST:
-            return { ...state, data: state.data.filter(d => d.name !== action.id) }
+            return { ...state, data: state.data.filter(d => d.id !== action.id) }
 
         default:
             return state;

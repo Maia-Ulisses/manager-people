@@ -13,7 +13,6 @@ const sagaMiddleware = createSagaMiddleware();
 
 const allStoreEnhancers = compose(
     applyMiddleware(sagaMiddleware),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
 const store = createStore(allReducers,allStoreEnhancers);
