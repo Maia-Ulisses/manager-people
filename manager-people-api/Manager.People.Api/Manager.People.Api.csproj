@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Manager.People.Infra.Data\Manager.People.Infra.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Results\" />
-  </ItemGroup>
-
 </Project>
