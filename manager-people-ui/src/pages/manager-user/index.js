@@ -15,7 +15,8 @@ export default function ManagerUser() {
   const classes = style();
   const user = useSelector(state => state.user);
   const modal = useSelector(state => state.modal);
- const customListUsers = (users) => users.data.map(u => { return {id:u.id, content:`${u.name} | ${u.email} | ${u.cpf}` } });
+  const customListUsers = (users) => 
+    users.data.map(u => { return {id:u.id, content:`${u.name} | ${u.email} | ${u.cpf}` } });
   const dispatch = useDispatch();
 
   const [userData, setUserData] = useState(user);

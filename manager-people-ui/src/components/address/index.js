@@ -1,18 +1,89 @@
-import React from 'react';
-import { Grid } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Grid, Button } from '@material-ui/core';
 import { Form, Field } from 'react-final-form';
 import TextFieldWrapper from '../TextField'
 import ListComponent from '../list-components'
 import style from './style';
 
-export default function AddressFilds() {
+const customListAddress = (addresses) =>
+  addresses.map(ad => { return { id: ad.id, content: `${ad.zipCode} | ${ad.street} | ${ad.city} | ${ad.state}` } });
+
+  const initialAddress = () => {
+    return {
+      id: 0,
+      zipCode: '',
+      street: '',
+      neighborhood: '',
+      city: '',
+      state: ''
+    }
+  }
+
+export default function AddressFilds(props) {
   const classes = style();
+  const [addresses, setAddresses] = useState(props.addresses)
+  const [customAddress, setCustomAddresses] = useState(customListAddress(addresses))
+  const [address, setAddress] = useState(initialAddress())
+
+  useEffect(() => {
+    setCustomAddresses(customListAddress(props.addresses))
+    setAddress(initialAddress())
+  }, [props])
+
+
+  const onEdit = (id) => {
+    const address = addresses.filter(ad => ad.id === id)[0]
+    setAddress(address);
+  }
+
+  const onRemove = (id) => {
+    const addressesUpdate = addresses.filter(ad => ad.id !== id);
+    setAddresses(addressesUpdate);
+    setCustomAddresses(customListAddress(addressesUpdate));
+    props.onClick(addressesUpdate);
+  }
+
+  const completedAddresFilds = (values) => {
+    if (addresses.map(ad => ad.id === values.id).filter(x => x)[0]) {
+      const addressesUpdate = addresses.map(ad => {
+        if (ad.id === values.id) {
+          ad.id = values.id;
+          ad.zipCode = values.zipCode;
+          ad.street = values.street;
+          ad.neighborhood = values.neighborhood;
+          ad.city = values.city;
+          ad.state = values.state
+        }
+        return ad;
+      })
+      setAddresses(addressesUpdate);
+      setCustomAddresses(customListAddress(addressesUpdate));
+    } else {
+      addresses.push(values);
+      setCustomAddresses(customListAddress(addresses));
+      setAddresses(addresses);
+    }
+    props.onClick(addresses);
+    setAddress(initialValues());
+  }
+
+  const initialValues = () => (
+    {
+      id: address.id,
+      zipCode: address.zipCode,
+      street: address.street,
+      neighborhood: address.neighborhood,
+      city: address.city,
+      state: address.state
+    }
+  )
+
   return (
     <div>
       <Form
-        onSubmit={() => { }}
-        initialValues={{ zipCode: '13060472', street: 'Rua Donato Pedro Santos', neighborhood: 'Jd. Santa Lucia', city: 'Campinas', state: 'SP' }}
-        render={({ handleSubmit, values, }) => (
+        onSubmit={completedAddresFilds}
+        initialValues={initialValues()}
+        render={({ handleSubmit, values}) => (
           <form onSubmit={handleSubmit}>
             <Grid container alignItems="flex-start" spacing={2}>
               <Grid item sm={6}>
@@ -65,16 +136,16 @@ export default function AddressFilds() {
                   label="estado"
                 />
               </Grid>
-              {console.log(JSON.stringify(values, 0, 2))}
+              <Grid item xs={6}>
+                <Button className={classes.button} type="submit"  variant="contained" color="primary">
+                  Salvar
+              </Button>
+              </Grid>
             </Grid>
           </form>
         )}
       />
-      <ListComponent array={[ {
-            name: 'Ulisses Maia',
-            cpf: '4580.080.98-19',
-            email: 'ulisses@gmail.com'
-        },]} isEdit={true} />
+      <ListComponent array={customAddress} onEdit={onEdit} onRemove={onRemove} isEdit={true} />
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Button } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { Form, Field } from 'react-final-form';
 import validateFields from './validate'
 import TextFieldWrapper from '../TextField'
 import style from './style';
+import ButtonWrapper from '../button/index'
 
 
 export default function UserFilds(props) {
@@ -83,9 +84,11 @@ export default function UserFilds(props) {
               />
             </Grid>
             <Grid item xs={6}>
-              <Button className={classes.button} type="submit" variant="contained" color="primary">
-                Next
-              </Button>
+              <div className={classes.button}>
+                <ButtonWrapper  type="submit" variant="contained" color="primary">
+                  Próximo
+              </ButtonWrapper>
+              </div>
             </Grid>
           </Grid>
         </form>

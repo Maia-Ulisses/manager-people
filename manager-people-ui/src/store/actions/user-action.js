@@ -11,11 +11,28 @@ export const userGetAllSuccess = (data) => ({
     }
 })
 
-export const userGet = (id, isEdit) => ({
+export const userUpdate = (data) => ({
+    type: ActionsTypes.USER_UPDATE_REQUEST,
+    payload:
+    {
+        data: data,
+    }
+})
+
+export const userAdd = (data) => ({
+    type: ActionsTypes.USER_CREATE_REQUEST,
+    payload:
+    {
+        data: data,
+    }
+})
+
+
+export const userGet = (data, isEdit) => ({
     type: ActionsTypes.USER_GET,
     payload:
     {
-        id: id,
+        data: data,
         isEdit: isEdit
     }
 })

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
 import store from './store/index';
-import ManagerUser from './page/manager-user'
+import ManagerUser from './pages/manager-user'
 
 export default function App(){
       return (
