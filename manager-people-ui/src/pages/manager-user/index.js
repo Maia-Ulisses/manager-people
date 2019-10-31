@@ -19,7 +19,6 @@ export default function ManagerUser() {
     users.data.map(u => { return {id:u.id, content:`${u.name} | ${u.email} | ${u.cpf}` } });
   const dispatch = useDispatch();
 
-  const [userData, setUserData] = useState(user);
   const [userList, setUserList] = useState(customListUsers(user));
 
   const [modalData, setModalData] = useState(modal);
@@ -30,7 +29,6 @@ export default function ManagerUser() {
   }, [])
 
   useEffect(() => {
-    setUserData(user)
     setUserList(customListUsers(user))
   }, [user])
 

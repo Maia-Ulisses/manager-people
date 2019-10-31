@@ -30,7 +30,6 @@ export default function UserModal(props) {
         open={open}
         onClose={handleClose}
         closeAfterTransition
-        //disableBackdropClick={true}
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,

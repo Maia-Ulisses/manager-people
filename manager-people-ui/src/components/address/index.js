@@ -10,18 +10,18 @@ import Button from '../button'
 const customListAddress = (addresses) =>
   addresses.map(ad => { return { id: ad.id, content: `${ad.zipCode} | ${ad.street} | ${ad.city} | ${ad.state}` } });
 
-  const initialAddress = () => {
-    return {
-      id: 0,
-      zipCode: '',
-      street: '',
-      neighborhood: '',
-      city: '',
-      state: ''
-    }
+const initialAddress = () => {
+  return {
+    id: 0,
+    zipCode: '',
+    street: '',
+    neighborhood: '',
+    city: '',
+    state: ''
   }
+}
 
-  const generateId = () => Math.floor(Math.random() * 999999999999) + 9999999999;
+const generateId = () => Math.floor(Math.random() * 999999999999) + 9999999999;
 
 
 export default function AddressFilds(props) {
@@ -53,23 +53,28 @@ export default function AddressFilds(props) {
     props.onClick(addressesUpdate);
   }
 
+  const updateAddress = (ad, values) => {
+    ad.id = values.id;
+    ad.zipCode = values.zipCode;
+    ad.street = values.street;
+    ad.neighborhood = values.neighborhood;
+    ad.city = values.city;
+    ad.state = values.state;
+  }
+
+
   const completedAddresFilds = async (values) => {
     if (addresses.map(ad => ad.id === values.id).filter(x => x)[0]) {
       const addressesUpdate = addresses.map(ad => {
         if (ad.id === values.id) {
-          ad.id = values.id;
-          ad.zipCode = values.zipCode;
-          ad.street = values.street;
-          ad.neighborhood = values.neighborhood;
-          ad.city = values.city;
-          ad.state = values.state
+          ad = updateAddress(ad, values);
         }
         return ad;
       })
       setAddresses(addressesUpdate);
       setCustomAddresses(customListAddress(addressesUpdate));
     } else {
-      addresses.push({...values, ...values, id:generateId()});
+      addresses.push({ ...values, ...values, id: generateId() });
       setCustomAddresses(customListAddress(addresses));
       setAddresses(addresses);
       setAddressForm(initialAddress())
@@ -94,10 +99,10 @@ export default function AddressFilds(props) {
       <Form
         onSubmit={completedAddresFilds}
         initialValues={addressForm}
-        render={({ handleSubmit, values, reset}) => (
+        render={({ handleSubmit, values, reset }) => (
           <form onSubmit={event => {
             const handle = handleSubmit(event);
-             handle.then(reset);
+            handle.then(reset);
           }}>
             <Grid container alignItems="flex-start" spacing={2}>
               <Grid item sm={6}>
@@ -151,8 +156,8 @@ export default function AddressFilds(props) {
                 />
               </Grid>
               <Grid item xs={6}>
-                <Button className={classes.button} type="submit"  variant="contained" color="primary">
-                  Salvar
+                <Button className={classes.button} type="submit" variant="contained" color="primary">
+                  Adicionar
               </Button>
               </Grid>
             </Grid>
@@ -160,9 +165,9 @@ export default function AddressFilds(props) {
         )}
       />
       <div className={classes.list}>
-      <ListComponent array={customAddress} onEdit={onEdit} onRemove={onRemove} isEdit={true} />
+        <ListComponent array={customAddress} onEdit={onEdit} onRemove={onRemove} isEdit={true} />
       </div>
     </div>
   );
-}
 
+}
